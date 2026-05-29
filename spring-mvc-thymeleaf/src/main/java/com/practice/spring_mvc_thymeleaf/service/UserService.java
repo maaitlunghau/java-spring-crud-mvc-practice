@@ -41,4 +41,15 @@ public class UserService {
 
         return this.list;
     }
+
+    public List<User> deleteUser(int id) {
+        // cách 1
+        // this.list.stream().filter(user -> user.getId() == id).findFirst()
+        // .ifPresent(user -> this.list.remove(user));
+
+        // cách 2: ngắn gọn hơn
+        this.list.removeIf(user -> user.getId() == id);
+
+        return this.list;
+    }
 }

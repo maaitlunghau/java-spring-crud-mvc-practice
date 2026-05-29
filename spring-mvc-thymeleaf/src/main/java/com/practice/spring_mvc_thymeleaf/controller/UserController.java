@@ -64,4 +64,12 @@ public class UserController {
 
         return "/user/index";
     }
+
+    @PostMapping("/user/delete/{id}")
+    public String deleteUser(Model model, @PathVariable int id) {
+        List<User> newUserList = this._userService.deleteUser(id);
+        model.addAttribute("users", newUserList);
+
+        return "/user/index";
+    }
 }
