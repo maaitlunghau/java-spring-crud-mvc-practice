@@ -1,10 +1,10 @@
-package com.practice.spring_mvc_jsp;
+package vn.hoidanit.springsieutoc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringMvcJspApplicationTests {
+class SpringsieutocApplicationTests {
 
 	@Test
 	void contextLoads() {
