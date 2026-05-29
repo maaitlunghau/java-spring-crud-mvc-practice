@@ -1,9 +1,7 @@
 package com.practice.spring_mvc_thymeleaf.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
