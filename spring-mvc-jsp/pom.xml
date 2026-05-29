@@ -12,8 +12,8 @@
 	<artifactId>springsieutoc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springsieutoc</name>
-	<description>Khóa Học Java Spring Siêu Tốc - Tác Giả: Hỏi Dân IT @hoidanit</description>
-	<url>https://hoidanit.vn</url>
+	<description></description>
+	<url></url>
 	<licenses>
 		<license/>
 	</licenses>
@@ -30,38 +30,39 @@
 		<java.version>25</java.version>
 	</properties>
 	<dependencies>
+		<!-- Starter Project -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Devtools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
   	  	</dependency>
 
+		<!-- Tomcat Jasper -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 
+		<!-- JSTL -->
 		<dependency>
-		<groupId>jakarta.servlet.jsp.jstl</groupId>
-		<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
 		</dependency>
-
 		<dependency>
-		<groupId>org.glassfish.web</groupId>
-		<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
