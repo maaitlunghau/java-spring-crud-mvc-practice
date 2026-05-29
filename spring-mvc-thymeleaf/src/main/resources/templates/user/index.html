@@ -15,38 +15,48 @@
             <a href="/user/create" class="btn btn-primary">Create Users</a>
         </div>
 
-        <table class="table table-bordered table-hover" style="text-align: center;">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="user: ${users}">
-                    <th th:text="${user.id}" />
-                    <td th:text="${user.name}" />
-                    <td th:text="${user.email}" />
-                    <td th:text="${user.age}" />
-                    <td style="display: flex; gap: 15px;">
-                        <a th:href="@{/user/edit/{id}(id=${user.id})}" class="btn btn-warning">
-                            Update
-                        </a>
-                        <form method="post" th:action="@{/user/delete/{id}(id=${user.id})}"
-                            onsubmit="return confirm('Are you sure to want to delete this user?')">
-                            <button class="btn btn-danger" type="submit" id="btn-delete">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+        <div th:if="${user != null and !#lists.isEmpty(users)}">
+            <table class="table table-bordered table-hover" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user: ${users}">
+                        <th th:text="${user.id}" />
+                        <td th:text="${user.name}" />
+                        <td th:text="${user.email}" />
+                        <td th:text="${user.age}" />
+                        <td style="display: flex; gap: 15px;">
+                            <a th:href="@{/user/edit/{id}(id=${user.id})}" class="btn btn-warning">
+                                Update
+                            </a>
+                            <form method="post" th:action="@{/user/delete/{id}(id=${user.id})}"
+                                onsubmit="return confirm('Are you sure to want to delete this user?')">
+                                <button class="btn btn-danger" type="submit" id="btn-delete">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
+        <div th:if="${user == null or #lists.isEmpty(users)}" style="text-align: center; margin-top: 50px;">
+            <h5>No Users Found!</h4>
+                <p>
+                    Currently, there are no users available. Please click the "Create Users" button to add new users to
+                    the
+                    system.
+                </p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
