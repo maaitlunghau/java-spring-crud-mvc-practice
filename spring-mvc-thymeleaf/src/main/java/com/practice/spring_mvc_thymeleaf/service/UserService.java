@@ -30,4 +30,15 @@ public class UserService {
 
         return this.list;
     }
+
+    public List<User> updateUser(User u) {
+        this.list.stream().filter(user -> user.getId() == u.getId()).findFirst()
+                .ifPresent((oldUser -> {
+                    oldUser.setName(u.getName());
+                    oldUser.setEmail(u.getEmail());
+                    oldUser.setAge(u.getAge());
+                }));
+
+        return this.list;
+    }
 }

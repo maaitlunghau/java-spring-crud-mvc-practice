@@ -32,7 +32,7 @@
                     <td th:text="${user.email}" />
                     <td th:text="${user.age}" />
                     <td style="display: flex; gap: 15px;">
-                        <a class="btn btn-warning">
+                        <a th:href="@{/user/edit/{id}(id=${user.id})}" class="btn btn-warning">
                             Update
                         </a>
                         <form method="post">
