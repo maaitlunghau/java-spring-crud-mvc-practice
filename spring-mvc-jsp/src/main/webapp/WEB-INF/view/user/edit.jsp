@@ -5,7 +5,7 @@
 
         <head>
             <meta charset="UTF-8">
-            <title>Create User</title>
+            <title>Update User</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
                 crossorigin="anonymous">
@@ -14,11 +14,13 @@
         <body>
             <div style="padding: 15px; margin-top: 15px">
                 <div style="width: 600px; margin: 0 auto;">
-                    <h3>Create a new user</h3>
+                    <h3>Update User with ID: ${id}</h3>
                     <hr />
 
-                    <form:form method="post" action="${pageContext.request.contextPath}/user/create"
+                    <form:form method="post" action="${pageContext.request.contextPath}/user/edit"
                         modelAttribute="user">
+
+                        <form:hidden path="id" />
 
                         <div class="mb-3">
                             <label class="form-label">Name</label>
@@ -32,7 +34,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Age</label>
-                            <form:input type="number" class="form-control" path="age" />
+                            <form:input type="text" class="form-control" path="age" />
                         </div>
 
                         <div>

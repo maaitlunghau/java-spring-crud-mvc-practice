@@ -1,16 +1,6 @@
-/*
- * Author: Hỏi Dân IT - @hoidanit 
- *
- * This source code is developed for the course
- * "Java Spring Siêu Tốc - Tự Học Java Spring Từ Số 0 Dành Cho Beginners từ A tới Z".
- * It is intended for educational purposes only.
- * Unauthorized distribution, reproduction, or modification is strictly prohibited.
- *
- * Copyright (c) 2025 Hỏi Dân IT. All Rights Reserved.
- */
-
 package vn.hoidanit.springsieutoc.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,15 +10,46 @@ import vn.hoidanit.springsieutoc.model.User;
 
 @Service
 public class UserService {
+    List<User> list = new ArrayList<>(Arrays.asList(new User(
+            1, "John Doe", "john.doe@example.com", 30),
+            new User(2, "Jane Smith", "jane.smith@example.com", 25),
+            new User(3, "Bob Johnson", "bob.johnson@example.com", 35)));
 
-    public List<User> fetchUsers() {
-        List<User> userList = Arrays.asList(
-                new User(1, "Hỏi Dân IT vs Eric", "hoidanit@example.com", "Hà Nội"),
-                new User(2, "Nguyễn Văn A", "a.nguyen@example.com", "Hà Nội"),
-                new User(3, "Trần Thị B", "b.tran@example.com", "TP.HCM"),
-                new User(4, "Lê Văn C", "c.le@example.com", "Đà Nẵng"));
-
-        return userList;
+    public List<User> getAllUsers() {
+        return this.list;
     }
 
+    public List<User> createUser(User u) {
+        int nextId = list.stream()
+                .mapToInt(User::getId)
+                .max()
+                .orElse(0) + 1;
+        u.setId(nextId);
+
+        list.addLast(u);
+
+        return this.list;
+    }
+
+    public List<User> updateUser(User u) {
+        this.list.stream().filter(user -> user.getId() == u.getId()).findFirst()
+                .ifPresent((oldUser -> {
+                    oldUser.setName(u.getName());
+                    oldUser.setEmail(u.getEmail());
+                    oldUser.setAge(u.getAge());
+                }));
+
+        return this.list;
+    }
+
+    public List<User> deleteUser(int id) {
+        // cách 1
+        // this.list.stream().filter(user -> user.getId() == id).findFirst()
+        // .ifPresent(user -> this.list.remove(user));
+
+        // cách 2: ngắn gọn hơn
+        this.list.removeIf(user -> user.getId() == id);
+
+        return this.list;
+    }
 }

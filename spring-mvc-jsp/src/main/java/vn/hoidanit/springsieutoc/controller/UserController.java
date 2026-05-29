@@ -11,9 +11,7 @@
 
 package vn.hoidanit.springsieutoc.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,55 +25,60 @@ import vn.hoidanit.springsieutoc.service.UserService;
 
 @Controller
 public class UserController {
-
-	private final UserService userService;
+	private final UserService _userService;
 
 	public UserController(UserService userService) {
-		this.userService = userService;
+		this._userService = userService;
 	}
 
 	@GetMapping("/user")
-	public String getUserPage(Model model) {
-		List<User> users = this.userService.fetchUsers();
-		model.addAttribute("users", users);
-		return "/user/show";
+	public String index(Model model) {
+		List<User> userList = this._userService.getAllUsers();
+		model.addAttribute("users", userList);
+
+		return "/user/index";
 	}
 
 	@GetMapping("/user/create")
-	public String getCreateUserPage(Model model) {
+	public String createPage(Model model) {
 		model.addAttribute("user", new User());
 		return "/user/create";
 	}
 
 	@PostMapping("/user/create")
-	public String postCreateUser(@ModelAttribute User user, Model model) {
-		user.setId(99);
-		List<User> userList = Arrays.asList(user);
-		model.addAttribute("users", userList); // x <= y
-		return "/user/show";
+	public String createUser(@ModelAttribute User createUser, Model model) {
+		List<User> userList = this._userService.createUser(createUser);
+		model.addAttribute("users", userList);
+
+		return "/user/index";
 	}
 
-	@GetMapping("/user/{id}")
-	public String getUpdateUserPage(Model model, @PathVariable int id) {
-		List<User> userList = this.userService.fetchUsers();
-		User updateUser = userList.stream().filter(user -> user.getId() == id).findFirst().get();
+	@GetMapping("/user/edit/{id}")
+	public String updatePage(Model model, @PathVariable int id) {
+		List<User> newUserList = this._userService.getAllUsers();
+
+		User updateUser = newUserList.stream().filter(user -> user.getId() == id)
+				.findFirst().get();
+
+		model.addAttribute("id", id);
 		model.addAttribute("user", updateUser);
-		return "/user/update";
+
+		return "/user/edit";
 	}
 
-	@PostMapping("/user/update")
-	public String postUpdatePage(@ModelAttribute User updateUser, Model model) {
-		updateUser.setId(99);
-		List<User> userList = Arrays.asList(updateUser);
-		model.addAttribute("users", userList); // x <= y
-		return "/user/show";
+	@PostMapping("/user/edit")
+	public String updateUser(Model model, @ModelAttribute User updateUser) {
+		List<User> newUserList = this._userService.updateUser(updateUser);
+		model.addAttribute("users", newUserList);
+
+		return "/user/index";
 	}
 
 	@PostMapping("/user/delete/{id}")
-	public String postDeleteUser(Model model, @PathVariable int id) {
-		List<User> userList = this.userService.fetchUsers().stream().filter(user -> user.getId() != id)
-				.collect(Collectors.toList());
-		model.addAttribute("users", userList);
-		return "/user/show";
+	public String deleteUser(Model model, @PathVariable int id) {
+		List<User> newUserList = this._userService.deleteUser(id);
+		model.addAttribute("users", newUserList);
+
+		return "/user/index";
 	}
 }
